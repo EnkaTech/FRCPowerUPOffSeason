@@ -9,25 +9,23 @@ package frc.robot;
 
 import com.analog.adis16448.frc.ADIS16448_IMU;
 
-/**
- * The RobotMap is a mapping from the ports sensors and actuators are wired into
- * to a variable name. This provides flexibility changing wiring, makes checking
- * the wiring easier and significantly reduces the number of magic numbers
- * floating around.
- */
-public class RobotMap {
-  public static ADIS16448_IMU gyro = new ADIS16448_IMU();
-  public static int driveTrainFL = 1;
-  public static int driveTrainFR = 2;
-  public static int driveTrainRL = 3;
-  public static int driveTrainRR = 4;
-  // For example to map the left and right motors, you could define the
-  // following variables to use with your drivetrain subsystem.
-  // public static int leftMotor = 1;
-  // public static int rightMotor = 2;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
-  // If you are using multiple modules, make sure to define both the port
-  // number and the module. For example you with a rangefinder:
-  // public static int rangefinderPort = 1;
-  // public static int rangefinderModule = 1;
+
+public class RobotMap {
+  //Main Sensors
+  public static ADIS16448_IMU gyro = new ADIS16448_IMU();
+
+  //Drive Train Controllers
+  private static int driveTrainFL = 0;
+  private static int driveTrainFR = 1;
+  private static int driveTrainRL = 2;
+  private static int driveTrainRR = 3;
+
+  private static SpeedControllerGroup driveTrainL = new SpeedControllerGroup(new Victor(driveTrainFL),new Victor(driveTrainRL));
+  private static SpeedControllerGroup driveTrainR = new SpeedControllerGroup(new Victor(driveTrainFR),new Victor(driveTrainRR));
+  
+  public static DifferentialDrive driveTrain = new DifferentialDrive(driveTrainL, driveTrainR);
 }

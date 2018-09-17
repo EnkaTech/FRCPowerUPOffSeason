@@ -9,7 +9,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.AutonomousCommand;
@@ -23,7 +24,7 @@ import frc.robot.commands.AutonomousCommand;
  */
 public class Robot extends TimedRobot {
   public static IO IO;
-  public static NetworkTable networkTable;
+  public static NetworkTable table;
   public static SendableChooser<Integer> autoChooser;
 
   /**
@@ -34,7 +35,8 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     IO = new IO();
     autoChooser = new SendableChooser <Integer>();
-    networkTable = NetworkTable.getTable("datatable");
+    NetworkTableInstance instance = NetworkTableInstance.getDefault();
+    table = instance.getTable("datatable");
     autoChooser.addObject("Right Side Auto", 1);
     autoChooser.addDefault("Middle Auto", 2);
     autoChooser.addObject("Left Side Auto", 3);
@@ -51,7 +53,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    networkTable.putNumber("gyro", RobotMap.gyro.getAngleZ());
+    table.getEntry("gyro").setDouble(RobotMap.gyro.getAngle());
   }
 
 
@@ -81,7 +83,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    RobotMap.gyro.reset();
   }
 
   /**
