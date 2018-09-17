@@ -7,7 +7,7 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import com.analog.adis16448.frc.ADIS16448_IMU;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
  * floating around.
  */
 public class RobotMap {
-  public static ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+  public static ADIS16448_IMU gyro = new ADIS16448_IMU();
   public static int driveTrainFL = 1;
   public static int driveTrainFR = 2;
   public static int driveTrainRL = 3;

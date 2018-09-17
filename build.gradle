@@ -5,6 +5,9 @@ plugins {
 
 def ROBOT_CLASS = "frc.robot.Robot"
 
+repositories{
+    maven { url 'https://jitpack.io' }
+}
 // Define my targets (RoboRIO) and artifacts (deployable files)
 // This is added by GradleRIO's backing project EmbeddedTools.
 deploy {
@@ -32,6 +35,7 @@ dependencies {
     compile wpilib()
     compile ctre()
     compile navx()
+    compile 'com.github.juchong:ADIS16448-RoboRIO-Driver:master-SNAPSHOT'
 }
 
 // Setting up my Jar File. In this case, adding all libraries into the main jar ('fat jar')
