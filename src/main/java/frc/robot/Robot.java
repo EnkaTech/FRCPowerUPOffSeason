@@ -14,6 +14,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.AutonomousCommand;
+import frc.robot.subsystems.DriveTrain;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -26,6 +27,7 @@ public class Robot extends TimedRobot {
   public static IO IO;
   public static NetworkTable table;
   public static SendableChooser<Integer> autoChooser;
+  public static DriveTrain driveTrain;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -34,6 +36,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     IO = new IO();
+    driveTrain = new DriveTrain();
     autoChooser = new SendableChooser <Integer>();
     NetworkTableInstance instance = NetworkTableInstance.getDefault();
     table = instance.getTable("datatable");
