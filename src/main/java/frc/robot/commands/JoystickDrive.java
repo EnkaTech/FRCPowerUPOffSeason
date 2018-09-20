@@ -7,8 +7,6 @@
 
 package frc.robot.commands;
 
-import javax.swing.plaf.multi.MultiButtonUI;
-
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
@@ -30,11 +28,8 @@ public class JoystickDrive extends Command {
     if(Robot.IO.L1.get()){
       Robot.driveTrain.drive(Robot.IO.joy1,0.6);
     }
-    else if(Robot.IO.R1.get()){
-      Robot.driveTrain.drive(Robot.IO.joy1, 1);
-    }
     else{
-      Robot.driveTrain.drive(Robot.IO.joy1, 0.75);
+      Robot.driveTrain.drive(Robot.IO.joy1, 1);
     }
   }
 
