@@ -25,7 +25,12 @@ public class JoystickDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.driveTrain.drive(Robot.IO.joy1);
+    if(Robot.IO.L1.get()){
+      Robot.driveTrain.drive(Robot.IO.joy1,0.6);
+    }
+    else{
+      Robot.driveTrain.drive(Robot.IO.joy1, 1);
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()

@@ -36,8 +36,8 @@ public class DriveTrain extends Subsystem {
     driveTrain.tankDrive(spdL, spdR);
   }
 
-  public void drive(Joystick joy){
-    drive(joy.getRawAxis(5),joy.getRawAxis(1));
+  public void drive(Joystick joy, double mult){
+    drive(joy.getRawAxis(5)*mult,joy.getRawAxis(1)*mult);
   }
 
   public void gyroDrive(ADIS16448_IMU gyro,char x){
