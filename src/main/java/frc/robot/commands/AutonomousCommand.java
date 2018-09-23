@@ -11,38 +11,36 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutonomousCommand extends CommandGroup {
-  //addSequential(new Command());
-  //addParallel(new Command()); 
+  // addSequential(new Command());
+  // addParallel(new Command());
   public AutonomousCommand(int x) {
-    switch (x){
+    boolean alliedSwitchIsRight = DriverStation.getInstance().getGameSpecificMessage().charAt(0) == 'R';
+    switch (x) {
     case 1:
-      if(DriverStation.getInstance().getGameSpecificMessage().charAt(0)=='R'){
+      if (alliedSwitchIsRight) {
+
+      } else {
 
       }
-      else{
-        
-      }
-    break;
+      break;
 
     case 2:
-      if(DriverStation.getInstance().getGameSpecificMessage().charAt(0)=='R'){
-        
-      }
-      else{
+      if (alliedSwitchIsRight) {
+
+      } else {
 
       }
 
-    break;
+      break;
 
     case 3:
-      if(DriverStation.getInstance().getGameSpecificMessage().charAt(0)=='R'){
-        
-      }
-      else{
+      if (alliedSwitchIsRight) {
+
+      } else {
 
       }
 
-    break;
+      break;
     }
   }
 }

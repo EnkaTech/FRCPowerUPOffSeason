@@ -13,19 +13,20 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
-
 public class RobotMap {
-  //Main Sensors
+  // Main Sensors
   public static ADIS16448_IMU gyro = new ADIS16448_IMU();
 
-  //Drive Train Controllers
-  private static int driveTrainFL = 0;
-  private static int driveTrainFR = 1;
-  private static int driveTrainRL = 2;
-  private static int driveTrainRR = 3;
+  // Drive Train Controllers
+  private static int dt_FrontLeft = 0;
+  private static int dt_FrontRight = 1;
+  private static int dt_RearLeft = 2;
+  private static int dt_RearRight = 3;
 
-  private static SpeedControllerGroup driveTrainL = new SpeedControllerGroup(new Victor(driveTrainFL),new Victor(driveTrainRL));
-  private static SpeedControllerGroup driveTrainR = new SpeedControllerGroup(new Victor(driveTrainFR),new Victor(driveTrainRR));
-  
+  private static SpeedControllerGroup driveTrainL = new SpeedControllerGroup(new Victor(dt_FrontLeft),
+      new Victor(dt_RearLeft));
+  private static SpeedControllerGroup driveTrainR = new SpeedControllerGroup(new Victor(dt_FrontRight),
+      new Victor(dt_RearRight));
+
   public static DifferentialDrive driveTrain = new DifferentialDrive(driveTrainL, driveTrainR);
 }
