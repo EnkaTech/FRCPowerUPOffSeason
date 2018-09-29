@@ -9,6 +9,7 @@ package frc.robot;
 
 import com.analog.adis16448.frc.ADIS16448_IMU;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -22,7 +23,7 @@ public class RobotMap {
   private static int dt_FrontRight = 1;
   private static int dt_RearLeft = 2;
   private static int dt_RearRight = 3;
-
+  public static Compressor compressor = new Compressor(0);
   private static SpeedControllerGroup driveTrainL = new SpeedControllerGroup(new Victor(dt_FrontLeft),
       new Victor(dt_RearLeft));
   private static SpeedControllerGroup driveTrainR = new SpeedControllerGroup(new Victor(dt_FrontRight),
