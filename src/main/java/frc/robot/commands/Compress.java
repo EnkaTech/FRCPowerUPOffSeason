@@ -7,8 +7,6 @@
 
 package frc.robot.commands;
 
-import javax.swing.text.StyledEditorKit.BoldAction;
-
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 public class Compress extends Command {
@@ -16,7 +14,7 @@ public class Compress extends Command {
   public Compress(boolean x) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis); 
-    requires(Robot.CompressorSub);
+    requires(Robot.compressor);
     this.x = x;
   }
 

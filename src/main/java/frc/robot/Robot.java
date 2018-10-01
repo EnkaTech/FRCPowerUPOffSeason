@@ -14,6 +14,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.AutonomousCommand;
+import frc.robot.subsystems.CompressorSub;
 import frc.robot.subsystems.DriveTrain;
 
 /**
@@ -28,6 +29,7 @@ public class Robot extends TimedRobot {
   public static NetworkTable table;
   public static SendableChooser<Integer> autoChooser;
   public static DriveTrain driveTrain;
+  public static CompressorSub compressor;
 
   /**i
    * This function is run when the robot is first started up and should be
@@ -37,6 +39,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     IO = new IO();
     driveTrain = new DriveTrain();
+    compressor = new CompressorSub();
     autoChooser = new SendableChooser <Integer>();
     NetworkTableInstance instance = NetworkTableInstance.getDefault();
     table = instance.getTable("datatable");
