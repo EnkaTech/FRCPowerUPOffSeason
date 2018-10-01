@@ -7,6 +7,9 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.networktables.NetworkTable;
@@ -28,37 +31,65 @@ public class Robot extends TimedRobot {
   public static NetworkTable table;
   public static SendableChooser<Integer> autoChooser;
   public static DriveTrain driveTrain;
+  public static Encoder sampleEncoder;
+  public static final double kDistancePerRevolution = 18.84; // guestimate from your code
+  public static final double kPulsesPerRevolution = 1024; // for an AS5145B Magnetic Encoder
+  public static final double kDistancePerPulse = kDistancePerRevolution / kPulsesPerRevolution;
+  public static DoubleSolenoid s;
+  public static SendableChooser<Integer> selim;
+  public static Compressor x;
 
-  /**i
-   * This function is run when the robot is first started up and should be
-   * used for any initialization code.
+  /**
+   * i This function is run when the robot is first started up and should be used
+   * for any initialization code.
    */
   @Override
   public void robotInit() {
     IO = new IO();
     driveTrain = new DriveTrain();
-    autoChooser = new SendableChooser <Integer>();
+    autoChooser = new SendableChooser<Integer>();
+    selim = new SendableChooser<Integer>();
     NetworkTableInstance instance = NetworkTableInstance.getDefault();
     table = instance.getTable("datatable");
     autoChooser.addObject("Right Side Auto", 1);
     autoChooser.addDefault("Middle Auto", 2);
     autoChooser.addObject("Left Side Auto", 3);
+    selim.addDefault("Kapalı", 1);
+    selim.addObject("Ön",2 );
+    selim.addObject("Arka", 3);
+    SmartDashboard.putData("Piston", selim);
     SmartDashboard.putData("Auto mode", autoChooser);
+    sampleEncoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
+    s = new DoubleSolenoid(0, 1);
+    sampleEncoder.setDistancePerPulse(kDistancePerPulse);
+    sampleEncoder.reset();
   }
 
-  /**
-   * This function is called every robot packet, no matter the mode. Use
-   * this for items like diagnostics that you want ran during disabled,
-   * autonomous, teleoperated and test.
+  /*
+   * This function is called every robot packet, no matter the mode. Use this for
+   * items like diagnostics that you want ran during disabled, autonomous,
+   * teleoperated and test.
    *
-   * <p>This runs after the mode specific periodic functions, but before
+   * <p> This runs after the mode specific periodic functions, but before
    * LiveWindow and SmartDashboard integrated updating.
    */
   @Override
   public void robotPeriodic() {
     table.getEntry("gyro").setDouble(RobotMap.gyro.getAngle());
-  }
+    SmartDashboard.putNumber("enc", sampleEncoder.getDistance());
+    switch (selim.getSelected()) {
 
+    case 2:
+      s.set(DoubleSolenoid.Value.kForward);
+      break;
+    case 3:
+      s.set(DoubleSolenoid.Value.kReverse);
+      break;
+    default:
+      s.set(DoubleSolenoid.Value.kOff);
+      break;
+    }
+  }
 
   @Override
   public void disabledInit() {
@@ -68,7 +99,6 @@ public class Robot extends TimedRobot {
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
   }
-
 
   @Override
   public void autonomousInit() {
