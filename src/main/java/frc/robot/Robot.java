@@ -45,6 +45,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    x = new Compressor();
     IO = new IO();
     driveTrain = new DriveTrain();
     autoChooser = new SendableChooser<Integer>();
@@ -124,6 +125,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    x.setClosedLoopControl(true);
   }
 
   /**
