@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.AutonomousCommand;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Gripper;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -38,6 +39,7 @@ public class Robot extends TimedRobot {
   public static DoubleSolenoid s;
   public static SendableChooser<Integer> selim;
   public static Compressor x;
+  public static Gripper grip;
 
   /**
    * i This function is run when the robot is first started up and should be used
@@ -45,6 +47,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    grip = new Gripper(0, 1, 2);
     x = new Compressor();
     IO = new IO();
     driveTrain = new DriveTrain();
