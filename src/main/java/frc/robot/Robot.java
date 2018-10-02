@@ -55,8 +55,8 @@ public class Robot extends TimedRobot {
     autoChooser.addObject("Right Side Auto", 1);
     autoChooser.addDefault("Middle Auto", 2);
     autoChooser.addObject("Left Side Auto", 3);
-    selim.addDefault("Kapalı", 1);
-    selim.addObject("Ön",2 );
+    selim.addDefault("Kapali", 1);
+    selim.addObject("On",2 );
     selim.addObject("Arka", 3);
     SmartDashboard.putData("Piston", selim);
     SmartDashboard.putData("Auto mode", autoChooser);
