@@ -7,45 +7,53 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class PistonMotion extends Command {
-  public static boolean fwd;
+  public boolean fwd, done;
 
   public PistonMotion(boolean fwd) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.grip);
+    requires(Robot.gripper);
     this.fwd = fwd;
+    this.done = false;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    if (fwd)
+      Robot.gripper.tighten();
+    else
+      Robot.gripper.loosen();
+    Timer.delay(0.02);
+    done = true;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(fwd) Robot.grip.tighten();
-    else Robot.grip.loosen();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return done;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.gripper.off();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }

@@ -7,9 +7,9 @@
 
 package frc.robot.subsystems;
 
-
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Gripper extends Subsystem {
   public static DoubleSolenoid s1;
   public static Solenoid s2;
+
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   public Gripper(int s1porta, int s1portb, int s2port) {
@@ -33,12 +34,17 @@ public class Gripper extends Subsystem {
   }
 
   public void tighten() {
-    s1.set(DoubleSolenoid.Value.kForward);
+    s1.set(Value.kForward);
     s2.set(true);
-  } 
+  }
 
   public void loosen() {
-    s1.set(DoubleSolenoid.Value.kReverse);
+    s1.set(Value.kReverse);
     s2.set(false);
   }
+
+  public void off() {
+    s1.set(Value.kOff);
+  }
+
 }

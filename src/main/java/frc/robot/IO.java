@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.PistonMotion;
 
 public class IO {
 
@@ -24,6 +25,7 @@ public class IO {
   public Button Y_1 = new JoystickButton(joy1, 4);
   public Button L1_1 = new JoystickButton(joy1, 5);
   public Button R1_1 = new JoystickButton(joy1, 6);
+  public Button back_1 = new JoystickButton(joy1, 7);
 
   // Button Config for Joystick 2
   public Button A_2 = new JoystickButton(joy2, 1);
@@ -32,5 +34,12 @@ public class IO {
   public Button Y_2 = new JoystickButton(joy2, 4);
   public Button L1_2 = new JoystickButton(joy2, 5);
   public Button R1_2 = new JoystickButton(joy2, 6);
+  public Button back_2 = new JoystickButton(joy1, 7);
 
+//Button Assigments
+  public IO() {
+    A_1.whenPressed(new PistonMotion(true));
+    B_1.whenPressed(new PistonMotion(false));
+  }
 }
+

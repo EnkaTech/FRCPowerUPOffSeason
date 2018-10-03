@@ -7,9 +7,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.networktables.NetworkTable;
@@ -32,14 +31,10 @@ public class Robot extends TimedRobot {
   public static NetworkTable table;
   public static SendableChooser<Integer> autoChooser;
   public static DriveTrain driveTrain;
-  public static Encoder sampleEncoder;
-  public static final double kDistancePerRevolution = 18.84; // guestimate from your code
-  public static final double kPulsesPerRevolution = 1024; // for an AS5145B Magnetic Encoder
-  public static final double kDistancePerPulse = kDistancePerRevolution / kPulsesPerRevolution;
-  public static DoubleSolenoid s;
-  public static SendableChooser<Integer> selim;
-  public static Compressor x;
-  public static Gripper grip;
+  public static Compressor compressor;
+  public static Gripper gripper;
+  public static CameraServer cameraServer;
+  public static NetworkTableInstance instance;
 
   /**
    * i This function is run when the robot is first started up and should be used
@@ -47,26 +42,20 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    grip = new Gripper(0, 1, 2);
-    x = new Compressor();
+    gripper = new Gripper(0, 1, 2);
+    compressor = new Compressor();
     IO = new IO();
     driveTrain = new DriveTrain();
     autoChooser = new SendableChooser<Integer>();
-    selim = new SendableChooser<Integer>();
-    NetworkTableInstance instance = NetworkTableInstance.getDefault();
+    instance = NetworkTableInstance.getDefault();
     table = instance.getTable("datatable");
     autoChooser.addObject("Right Side Auto", 1);
     autoChooser.addDefault("Middle Auto", 2);
     autoChooser.addObject("Left Side Auto", 3);
-    selim.addDefault("Kapali", 1);
-    selim.addObject("On",2 );
-    selim.addObject("Arka", 3);
-    SmartDashboard.putData("Piston", selim);
     SmartDashboard.putData("Auto mode", autoChooser);
-    sampleEncoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
-    s = new DoubleSolenoid(0, 1);
-    sampleEncoder.setDistancePerPulse(kDistancePerPulse);
-    sampleEncoder.reset();
+    cameraServer = CameraServer.getInstance();
+    cameraServer.startAutomaticCapture();
+    compressor.setClosedLoopControl(true);
   }
 
   /*
@@ -79,19 +68,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    table.getEntry("gyro").setDouble(RobotMap.gyro.getAngle());
-    SmartDashboard.putNumber("enc", sampleEncoder.getDistance());
-    switch (selim.getSelected()) {
-
-    case 2:
-      s.set(DoubleSolenoid.Value.kForward);
-      break;
-    case 3:
-      s.set(DoubleSolenoid.Value.kReverse);
-      break;
-    default:
-      s.set(DoubleSolenoid.Value.kOff);
-      break;
+    if (compressor.getPressureSwitchValue()) {
+      compressor.setClosedLoopControl(false);
+    }
+    else if (IO.back_1.get()){
+      compressor.setClosedLoopControl(true);
     }
   }
 
@@ -128,7 +109,6 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    x.setClosedLoopControl(true);
   }
 
   /**
