@@ -9,6 +9,8 @@ package frc.robot;
 
 import com.analog.adis16448.frc.ADIS16448_IMU;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -23,6 +25,14 @@ public class RobotMap {
     private static int dt_FrontRight = 1;
     private static int dt_RearLeft = 2;
     private static int dt_RearRight = 3;
+
+    // Pneumatic valves
+    private static int lv = 2;
+    private static int rv_a = 0;
+    private static int rv_b = 1;
+
+    public static DoubleSolenoid rightValve = new DoubleSolenoid(rv_a, rv_b);
+    public static Solenoid leftValve = new Solenoid(lv);
 
     private static SpeedControllerGroup driveTrainL = new SpeedControllerGroup(new Victor(dt_FrontLeft),
             new Victor(dt_RearLeft));

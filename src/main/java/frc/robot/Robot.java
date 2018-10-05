@@ -42,7 +42,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    gripper = new Gripper(0, 1, 2);
+    gripper = new Gripper(RobotMap.rightValve, RobotMap.leftValve);
     compressor = new Compressor();
     IO = new IO();
     driveTrain = new DriveTrain();
