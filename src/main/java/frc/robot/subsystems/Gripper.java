@@ -21,10 +21,10 @@ public class Gripper extends Subsystem {
 
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  public Gripper(int s1porta, int s1portb, int s2port) {
-    s1 = new DoubleSolenoid(s1porta, s1portb);
-    s2 = new Solenoid(s2port);
 
+  public Gripper(DoubleSolenoid rightValve, Solenoid leftValve) {
+    s1 = rightValve;
+    s2 = leftValve;
   }
 
   @Override

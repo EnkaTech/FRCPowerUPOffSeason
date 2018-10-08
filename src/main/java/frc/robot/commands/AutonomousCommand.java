@@ -30,7 +30,6 @@ public class AutonomousCommand extends CommandGroup {
       } else {
 
       }
-
       break;
 
     case 3:
@@ -39,7 +38,6 @@ public class AutonomousCommand extends CommandGroup {
       } else {
 
       }
-
       break;
     }
   }

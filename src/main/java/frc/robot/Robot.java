@@ -43,10 +43,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    gripper = new Gripper(0, 1, 2);
-    compressor = new Compressor();
     IO = new IO();
     driveTrain = new DriveTrain();
+    gripper = new Gripper(RobotMap.rightValve, RobotMap.leftValve);
+    compressor = new Compressor();
     autoChooser = new SendableChooser<Integer>();
     instance = NetworkTableInstance.getDefault();
     table = instance.getTable("datatable");
