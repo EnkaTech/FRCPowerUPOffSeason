@@ -35,7 +35,6 @@ public class Robot extends TimedRobot {
   public static Gripper gripper;
   public static CameraServer cameraServer;
   public static NetworkTableInstance instance;
-  public static AutonomousCommand auto;
 
   /**
    * i This function is run when the robot is first started up and should be used
@@ -43,16 +42,16 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    IO = new IO();
-    driveTrain = new DriveTrain();
     gripper = new Gripper(RobotMap.rightValve, RobotMap.leftValve);
     compressor = new Compressor();
+    IO = new IO();
+    driveTrain = new DriveTrain();
     autoChooser = new SendableChooser<Integer>();
     instance = NetworkTableInstance.getDefault();
     table = instance.getTable("datatable");
-    autoChooser.addOption("Right Side Auto", 1);
-    autoChooser.setDefaultOption("Middle Auto", 2);
-    autoChooser.addOption("Left Side Auto", 3);
+    autoChooser.addObject("Right Side Auto", 1);
+    autoChooser.addDefault("Middle Auto", 2);
+    autoChooser.addObject("Left Side Auto", 3);
     SmartDashboard.putData("Auto mode", autoChooser);
     cameraServer = CameraServer.getInstance();
     cameraServer.startAutomaticCapture();
@@ -71,7 +70,8 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     if (compressor.getPressureSwitchValue()) {
       compressor.setClosedLoopControl(false);
-    } else if (IO.back_1.get()) {
+    }
+    else if (IO.back_1.get()){
       compressor.setClosedLoopControl(true);
     }
   }
@@ -88,8 +88,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     RobotMap.gyro.reset();
-    auto = new AutonomousCommand(autoChooser.getSelected());
-    auto.start();
+    new AutonomousCommand(autoChooser.getSelected()).start();
   }
 
   /**

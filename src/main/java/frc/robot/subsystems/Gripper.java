@@ -16,15 +16,15 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * Add your docs here.
  */
 public class Gripper extends Subsystem {
-  public static DoubleSolenoid s1;
-  public static Solenoid s2;
+  public DoubleSolenoid s1;
+  public Solenoid s2;
 
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-
   public Gripper(DoubleSolenoid rightValve, Solenoid leftValve) {
-    s1 = rightValve;
-    s2 = leftValve;
+    this.s1 = rightValve;
+    this.s2 = leftValve;
+
   }
 
   @Override
