@@ -10,11 +10,13 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class JoystickDrive extends Command {
-  public JoystickDrive() {
+public class ElevatorMove extends Command {
+  double x;
+  public ElevatorMove(double x) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.driveTrain);
+    requires(Robot.elevator);
+    this.x = x;
   }
 
   // Called just before this Command runs the first time
@@ -25,11 +27,7 @@ public class JoystickDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (Robot.IO.L1_1.get()) {
-      Robot.driveTrain.drive(Robot.IO.joy1, 0.6);
-    } else {
-      Robot.driveTrain.drive(Robot.IO.joy1, 1);
-    }
+    Robot.elevator.move(x);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -41,7 +39,7 @@ public class JoystickDrive extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.driveTrain.drive(0, 0);
+    Robot.elevator.move(0);
   }
 
   // Called when another command which requires one or more of the same

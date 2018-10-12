@@ -7,21 +7,16 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
  */
-public class Gripper extends Subsystem {
-  private DoubleSolenoid s1 = RobotMap.rightValve;
-  private Solenoid s2 = RobotMap.leftValve;
-
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands
+public class Elevator extends Subsystem {
+  private SpeedController cim1 = RobotMap.elevator_1;
+  private SpeedController cim2 = RobotMap.elevator_2;
 
   @Override
   public void initDefaultCommand() {
@@ -29,18 +24,8 @@ public class Gripper extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
 
-  public void tighten() {
-    s1.set(Value.kForward);
-    s2.set(true);
+  public void move(double x) {
+    cim1.set(x);
+    cim2.set(x);
   }
-
-  public void loosen() {
-    s1.set(Value.kReverse);
-    s2.set(false);
-  }
-
-  public void off() {
-    s1.set(Value.kOff);
-  }
-
 }

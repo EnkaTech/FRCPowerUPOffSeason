@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.networktables.NetworkTable;
@@ -17,6 +18,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.AutonomousCommand;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Gripper;
 
 /**
@@ -35,6 +37,7 @@ public class Robot extends TimedRobot {
   public static Gripper gripper;
   public static CameraServer cameraServer;
   public static NetworkTableInstance instance;
+  public static Elevator elevator;
 
   /**
    * i This function is run when the robot is first started up and should be used
@@ -42,8 +45,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    gripper = new Gripper(RobotMap.rightValve, RobotMap.leftValve);
+    gripper = new Gripper();
     compressor = new Compressor();
+    elevator = new Elevator();
     IO = new IO();
     driveTrain = new DriveTrain();
     autoChooser = new SendableChooser<Integer>();
