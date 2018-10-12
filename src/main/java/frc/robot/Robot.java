@@ -74,8 +74,7 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     if (compressor.getPressureSwitchValue()) {
       compressor.setClosedLoopControl(false);
-    }
-    else if (IO.back_1.get()){
+    } else if (IO.back_1.get()) {
       compressor.setClosedLoopControl(true);
     }
   }
