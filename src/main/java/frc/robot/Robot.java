@@ -60,6 +60,7 @@ public class Robot extends TimedRobot {
     cameraServer = CameraServer.getInstance();
     cameraServer.startAutomaticCapture();
     compressor.setClosedLoopControl(true);
+    RobotMap.elevatorEncoder.setDistancePerPulse(RobotMap.elevatorDPP);
   }
 
   /*
@@ -77,6 +78,7 @@ public class Robot extends TimedRobot {
     } else if (IO.back_1.get()) {
       compressor.setClosedLoopControl(true);
     }
+    SmartDashboard.putNumber("Elevator Height", RobotMap.elevatorEncoder.getDistance() + 20);
   }
 
   @Override

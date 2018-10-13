@@ -10,17 +10,26 @@ package frc.robot;
 import com.analog.adis16448.frc.ADIS16448_IMU;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class RobotMap {
+        public static double map(double x, double in_min, double in_max, double out_min, double out_max) {
+                return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+        }
 
         // Main Sensors
         public static ADIS16448_IMU gyro = new ADIS16448_IMU();
+        public static Encoder elevatorEncoder = new Encoder(0, 1, false, EncodingType.k4X);
+        // 1 tur = 6.5cm
+        private static double elevatorPPR = 2048;
+        public static double elevatorDPP = (1 / elevatorPPR) * 6.5;
 
         // Drive Train Controllers
         private static int dt_FrontLeft = 0;

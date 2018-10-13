@@ -7,27 +7,38 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
-public class ElevatorMove extends Command {
-  double x;
-  public ElevatorMove(double x) {
+public class SetElevatorHeight extends Command {
+  double height = RobotMap.elevatorEncoder.getDistance();
+
+  public SetElevatorHeight() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.elevator);
-    this.x = x;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    while (Robot.IO.X_1.get() || Robot.IO.Y_1.get()) {
+      if (Robot.IO.X_1.get()) {
+        height++;
+        Timer.delay(0.02);
+      } else if (Robot.IO.Y_1.get()) {
+        height--;
+        Timer.delay(0.02);
+      }
+    }
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.elevator.move(x);
+    Robot.elevator.stabilize(RobotMap.elevatorEncoder, height);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -39,13 +50,11 @@ public class ElevatorMove extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.elevator.move(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    end();
   }
 }

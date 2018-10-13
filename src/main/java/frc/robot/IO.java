@@ -10,9 +10,9 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.ElevatorMove;
 import frc.robot.commands.GripperIntake;
 import frc.robot.commands.PistonMotion;
+import frc.robot.commands.SetElevatorHeight;
 
 public class IO {
 
@@ -28,6 +28,7 @@ public class IO {
   public Button L1_1 = new JoystickButton(joy1, 5);
   public Button R1_1 = new JoystickButton(joy1, 6);
   public Button back_1 = new JoystickButton(joy1, 7);
+  public Button L3_1 = new JoystickButton(joy1, 9);
 
   // Button Config for Joystick 2
   public Button A_2 = new JoystickButton(joy2, 1);
@@ -37,14 +38,15 @@ public class IO {
   public Button L1_2 = new JoystickButton(joy2, 5);
   public Button R1_2 = new JoystickButton(joy2, 6);
   public Button back_2 = new JoystickButton(joy1, 7);
+  public Button L3_2 = new JoystickButton(joy2, 9);
 
-//Button Assigments
+  // Button Assigments
   public IO() {
     A_1.whenPressed(new PistonMotion(true));
     B_1.whenPressed(new PistonMotion(false));
-    X_1.whileHeld(new ElevatorMove(1));
+    X_1.whenPressed(new SetElevatorHeight());
+    Y_1.whenPressed(new SetElevatorHeight());
     L1_1.whileHeld(new GripperIntake(1));
     R1_1.whileHeld(new GripperIntake(-1));
   }
 }
-

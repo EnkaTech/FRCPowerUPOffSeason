@@ -7,7 +7,8 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
@@ -15,8 +16,7 @@ import frc.robot.RobotMap;
  * Add your docs here.
  */
 public class Elevator extends Subsystem {
-  private SpeedController cim1 = RobotMap.elevator_1;
-  private SpeedController cim2 = RobotMap.elevator_2;
+  private SpeedControllerGroup motors = new SpeedControllerGroup(RobotMap.elevator_1, RobotMap.elevator_2);
 
   @Override
   public void initDefaultCommand() {
@@ -24,8 +24,12 @@ public class Elevator extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
 
-  public void move(double x) {
-    cim1.set(x);
-    cim2.set(x);
+  public void stabilize(Encoder e, double targetDistance) {
+    double difference = targetDistance - e.getDistance();
+    double throttle = RobotMap.map(difference, 180, -180, -0.8, 0.8);
+    if (throttle >= 0.2) {
+      throttle = 0.2;
+    }
+    motors.set(throttle);
   }
 }
