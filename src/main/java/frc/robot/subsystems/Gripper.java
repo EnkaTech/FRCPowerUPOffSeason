@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import edu.wpi.first.wpilibj.SpeedController;
 
 /**
  * Add your docs here.
@@ -19,6 +20,8 @@ import frc.robot.RobotMap;
 public class Gripper extends Subsystem {
   private DoubleSolenoid s1 = RobotMap.rightValve;
   private Solenoid s2 = RobotMap.leftValve;
+  private SpeedController wheel_l = RobotMap.wheel_l;
+  private SpeedController wheel_r = RobotMap.wheel_r;
 
   // Put methods for controlling this subsystem
   // here. Call these from Commands
@@ -27,6 +30,11 @@ public class Gripper extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
+  }
+
+  public void intake(double x){
+    wheel_l.set(x);
+    wheel_r.set(-x);
   }
 
   public void tighten() {

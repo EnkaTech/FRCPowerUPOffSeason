@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class RobotMap {
@@ -26,6 +27,14 @@ public class RobotMap {
         private static int dt_FrontRight = 1;
         private static int dt_RearLeft = 2;
         private static int dt_RearRight = 3;
+
+        // Redline motors
+
+        private static int gripw_l = 1;
+        private static int gripw_r = 2;
+
+        public static SpeedController wheel_l = new Spark(gripw_l);
+        public static SpeedController wheel_r = new Spark(gripw_r);
 
         // Pneumatic valves
         private static int lv = 2;

@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.ElevatorMove;
+import frc.robot.commands.GripperIntake;
 import frc.robot.commands.PistonMotion;
 
 public class IO {
@@ -42,6 +43,8 @@ public class IO {
     A_1.whenPressed(new PistonMotion(true));
     B_1.whenPressed(new PistonMotion(false));
     X_1.whileHeld(new ElevatorMove(1));
+    L1_1.whileHeld(new GripperIntake(1));
+    R1_1.whileHeld(new GripperIntake(-1));
   }
 }
 
