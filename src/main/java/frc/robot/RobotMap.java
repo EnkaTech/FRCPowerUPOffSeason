@@ -20,10 +20,12 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class RobotMap {
+        
         public static double map(double x, double in_min, double in_max, double out_min, double out_max) {
                 return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
         }
 
+        //TODO Sürücü kanalları ayarlanacak
         // Main Sensors
         public static ADIS16448_IMU gyro = new ADIS16448_IMU();
         public static Encoder elevatorEncoder = new Encoder(0, 1, false, EncodingType.k4X);
@@ -44,6 +46,11 @@ public class RobotMap {
 
         public static SpeedController wheel_l = new Spark(gripw_l);
         public static SpeedController wheel_r = new Spark(gripw_r);
+
+        // Joint motor
+
+        private static int joint = 5;
+        public static SpeedController jointMotor = new Victor(joint);
 
         // Pneumatic valves
         private static int lv = 2;
