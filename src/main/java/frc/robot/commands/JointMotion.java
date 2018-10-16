@@ -6,15 +6,22 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class JointMotion extends Command {
-  public JointMotion() {
+  double x;
+
+  public JointMotion(double x) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.gripper);
+    requires(Robot.joint);
+    this.x = x;
+  }
+
+  public JointMotion() {
+    requires(Robot.joint);
+
   }
 
   // Called just before this Command runs the first time
@@ -25,19 +32,19 @@ public class JointMotion extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.gripper.moveJoint(Robot.IO.joy2);
+    Robot.joint.moveJoint(Robot.IO.joy1);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return (Robot.IO.joy2.getRawAxis(2)-Robot.IO.joy2.getRawAxis(3)==0);
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.gripper.moveJoint(0);
+    Robot.joint.moveJoint(0);
   }
 
   // Called when another command which requires one or more of the same

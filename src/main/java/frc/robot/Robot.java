@@ -9,17 +9,18 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.AutonomousCommand;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Gripper;
+import frc.robot.subsystems.GripperJoint;
+import frc.robot.subsystems.GripperWheels;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -36,8 +37,9 @@ public class Robot extends TimedRobot {
   public static Compressor compressor;
   public static Gripper gripper;
   public static CameraServer cameraServer;
-  public static NetworkTableInstance instance;
   public static Elevator elevator;
+  public static GripperWheels wheels;
+  public static GripperJoint joint;
 
   /**
    * i This function is run when the robot is first started up and should be used
@@ -45,14 +47,14 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    joint = new GripperJoint();
     gripper = new Gripper();
     compressor = new Compressor();
     elevator = new Elevator();
+    wheels = new GripperWheels();
     IO = new IO();
     driveTrain = new DriveTrain();
     autoChooser = new SendableChooser<Integer>();
-    instance = NetworkTableInstance.getDefault();
-    table = instance.getTable("datatable");
     autoChooser.addObject("Right Side Auto", 1);
     autoChooser.addDefault("Middle Auto", 2);
     autoChooser.addObject("Left Side Auto", 3);
@@ -76,9 +78,11 @@ public class Robot extends TimedRobot {
     if (compressor.getPressureSwitchValue()) {
       compressor.setClosedLoopControl(false);
     } else if (IO.back_1.get()) {
-      compressor.setClosedLoopControl(true);
+      compressor.setClosedLoopControl(!compressor.getClosedLoopControl());
+      Timer.delay(0.2);
     }
-    SmartDashboard.putNumber("Elevator Height", RobotMap.elevatorEncoder.getDistance() + 20);
+    SmartDashboard.putNumber("Elevator Height", -RobotMap.elevatorEncoder.getDistance() + 20);
+    SmartDashboard.putNumber("Gyro", RobotMap.gyro.getAngleX());
   }
 
   @Override
@@ -106,6 +110,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    RobotMap.elevatorEncoder.reset();
   }
 
   /**

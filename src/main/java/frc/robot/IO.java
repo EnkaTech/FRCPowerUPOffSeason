@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.GripperIntake;
+import frc.robot.commands.JointMotion;
 import frc.robot.commands.PistonMotion;
 import frc.robot.commands.SetElevatorHeight;
 
@@ -31,22 +32,18 @@ public class IO {
   public Button L3_1 = new JoystickButton(joy1, 9);
 
   // Button Config for Joystick 2
-  public Button A_2 = new JoystickButton(joy2, 1);
-  public Button B_2 = new JoystickButton(joy2, 2);
-  public Button X_2 = new JoystickButton(joy2, 3);
-  public Button Y_2 = new JoystickButton(joy2, 4);
-  public Button L1_2 = new JoystickButton(joy2, 5);
-  public Button R1_2 = new JoystickButton(joy2, 6);
-  public Button back_2 = new JoystickButton(joy1, 7);
-  public Button L3_2 = new JoystickButton(joy2, 9);
+  public Button b_9 = new JoystickButton(joy2, 9);
+  public Button b_10 = new JoystickButton(joy2, 10);
+  public Button b_11 = new JoystickButton(joy2, 11);
+  public Button b_12 = new JoystickButton(joy2, 12);
 
   // Button Assigments
   public IO() {
     A_1.whenPressed(new PistonMotion(true));
     B_1.whenPressed(new PistonMotion(false));
-    X_1.whenPressed(new SetElevatorHeight());
-    Y_1.whenPressed(new SetElevatorHeight());
-    L1_1.whileHeld(new GripperIntake(1));
-    R1_1.whileHeld(new GripperIntake(-1));
+    b_9.whileHeld(new JointMotion(-1));
+    b_10.whileHeld(new JointMotion(1));
+    b_11.toggleWhenPressed(new GripperIntake(0.75));
+    b_12.toggleWhenPressed(new GripperIntake(-0.75));
   }
 }

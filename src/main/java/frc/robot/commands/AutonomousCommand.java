@@ -8,24 +8,31 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.RobotMap;
+import frc.robot.subsystems.Elevator;
 
 public class AutonomousCommand extends CommandGroup {
   // addSequential(new Command());
   // addParallel(new Command());
   public AutonomousCommand(int x) {
-    boolean alliedSwitchIsRight = DriverStation.getInstance().getGameSpecificMessage().charAt(0) == 'R';
+    boolean alliedScaleIsRight = DriverStation.getInstance().getGameSpecificMessage().charAt(1) == 'R';
     switch (x) {
     case 1:
-      if (alliedSwitchIsRight) {
-
+      if (alliedScaleIsRight) {
+        addParallel(new SetElevatorHeight(160));
+        addParallel(new TimedJoint(1, -0.8));
+        addSequential(new GyroDrive(4.4, false));
+        addSequential(new GyroTurn(90));
+        addSequential(new TimedIntake(0.75, -0.75));
       } else {
 
       }
       break;
 
     case 2:
-      if (alliedSwitchIsRight) {
+      if (alliedScaleIsRight) {
 
       } else {
 
@@ -34,7 +41,7 @@ public class AutonomousCommand extends CommandGroup {
       break;
 
     case 3:
-      if (alliedSwitchIsRight) {
+      if (alliedScaleIsRight) {
 
       } else {
 

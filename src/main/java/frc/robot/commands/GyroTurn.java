@@ -9,12 +9,15 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
-public class JoystickDrive extends Command {
-  public JoystickDrive() {
+public class GyroTurn extends Command {
+  double angle;
+  public GyroTurn(double angle) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.driveTrain);
+    this.angle = angle;
   }
 
   // Called just before this Command runs the first time
@@ -25,17 +28,13 @@ public class JoystickDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (Robot.IO.L1_1.get()) {
-      Robot.driveTrain.drive(Robot.IO.joy1, 0.6);
-    } else {
-      Robot.driveTrain.drive(Robot.IO.joy1, 1);
-    }
+    Robot.driveTrain.gyroTurn(RobotMap.gyro, angle);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return Math.abs(angle-RobotMap.gyro.getAngleX())<1;
   }
 
   // Called once after isFinished returns true

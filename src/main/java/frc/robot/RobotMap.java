@@ -34,10 +34,10 @@ public class RobotMap {
         public static double elevatorDPP = (1 / elevatorPPR) * 6.5;
 
         // Drive Train Controllers
-        private static int dt_FrontLeft = 0;
-        private static int dt_FrontRight = 1;
-        private static int dt_RearLeft = 2;
-        private static int dt_RearRight = 3;
+        private static int dt_FrontLeft = 4;
+        private static int dt_FrontRight = 8;
+        private static int dt_RearLeft = 5;
+        private static int dt_RearRight = 9;
 
         // Redline motors
 
@@ -49,17 +49,17 @@ public class RobotMap {
 
         // Joint motor
 
-        private static int joint = 5;
+        private static int joint = 3;
         public static SpeedController jointMotor = new Victor(joint);
 
         // Pneumatic valves
-        private static int lv = 2;
+        private static int lv = 4;
         private static int rv_a = 0;
         private static int rv_b = 1;
 
         // Elevator motors
-        private static int elevator_cim_1 = 4;
-        private static int elevator_cim_2 = 5;
+        private static int elevator_cim_1 = 7;
+        private static int elevator_cim_2 = 6;
 
         public static SpeedController elevator_1 = new Victor(elevator_cim_1);
         public static SpeedController elevator_2 = new Victor(elevator_cim_2);

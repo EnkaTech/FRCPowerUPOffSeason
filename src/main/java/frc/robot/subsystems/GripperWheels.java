@@ -7,31 +7,26 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
-import edu.wpi.first.wpilibj.SpeedController;
 
 /**
  * Add your docs here.
  */
-public class Gripper extends Subsystem {
-  private Solenoid s2 = RobotMap.leftValve;
+public class GripperWheels extends Subsystem {
+  private SpeedController wheel_l = RobotMap.wheel_l;
+  private SpeedController wheel_r = RobotMap.wheel_r;
   // Put methods for controlling this subsystem
-  // here. Call these from Commands
+  // here. Call these from Commands.
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
-
-  public void tighten() {
-    s2.set(true);
-  }
-
-  public void loosen() {
-    s2.set(false);
+  public void intake(double x) {
+    wheel_l.set(x);
+    wheel_r.set(x);
   }
 }

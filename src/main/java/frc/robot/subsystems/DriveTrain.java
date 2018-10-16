@@ -32,7 +32,7 @@ public class DriveTrain extends Subsystem {
   }
 
   public void drive(double spdL, double spdR) {
-    driveTrain.tankDrive(spdL, spdR);
+    driveTrain.tankDrive(-spdL, -spdR);
   }
 
   public void drive(Joystick joy, double mult) {
@@ -40,24 +40,24 @@ public class DriveTrain extends Subsystem {
   }
 
   public void gyroDrive(ADIS16448_IMU gyro, boolean front) {
-    double angle = gyro.getAngle() * Kp;
+    double angle = gyro.getAngleX() * Kp;
     if (front) {
-      drive((0.5 - angle), (0.5 + angle));
+      drive((0.7 - angle), (0.7 + angle));
     } else {
-      drive(-(0.5 + angle), -(0.5 - angle));
+      drive(-(0.7 + angle), -(0.7 - angle));
     }
     Timer.delay(0.0004);
   }
 
   public void gyroTurn(ADIS16448_IMU gyro, double x) {
-    double angle = gyro.getAngle();
+    double angle = gyro.getAngleX();
     double power = (x - angle) * Kp * 8;
-    if (power >= 0.7) {
-      power = 0.7;
+    if (power >= 0.5) {
+      power = 0.5;
     } else if (power > 0) {
       power = 0.5;
-    } else if (power <= -0.7) {
-      power = -0.7;
+    } else if (power <= -0.5) {
+      power = -0.5;
     } else {
       power = -0.5;
     }
