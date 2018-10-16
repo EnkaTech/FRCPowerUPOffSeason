@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class JoystickDrive extends Command {
   public JoystickDrive() {
@@ -25,7 +26,7 @@ public class JoystickDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (Robot.IO.L1_1.get()) {
+    if (Robot.IO.L1_1.get() || (-RobotMap.elevatorEncoder.getDistance()+20) >= 140) {
       Robot.driveTrain.drive(Robot.IO.joy1, 0.6);
     } else {
       Robot.driveTrain.drive(Robot.IO.joy1, 1);
