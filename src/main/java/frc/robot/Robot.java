@@ -55,9 +55,9 @@ public class Robot extends TimedRobot {
     IO = new IO();
     driveTrain = new DriveTrain();
     autoChooser = new SendableChooser<Integer>();
-    autoChooser.addObject("Right Side Auto", 1);
+    autoChooser.addObject("Left Side Auto", 1);
     autoChooser.addDefault("Middle Auto", 2);
-    autoChooser.addObject("Left Side Auto", 3);
+    autoChooser.addObject("Right Side Auto", 3);
     SmartDashboard.putData("Auto mode", autoChooser);
     cameraServer = CameraServer.getInstance();
     cameraServer.startAutomaticCapture();

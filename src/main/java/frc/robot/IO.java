@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.GripperIntake;
 import frc.robot.commands.JointMotion;
 import frc.robot.commands.PistonMotion;
-import frc.robot.commands.SetElevatorHeight;
 
 public class IO {
 

@@ -7,11 +7,9 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
-import edu.wpi.first.wpilibj.SpeedController;
 
 /**
  * Add your docs here.

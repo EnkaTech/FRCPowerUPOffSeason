@@ -25,7 +25,6 @@ public class RobotMap {
                 return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
         }
 
-        //TODO Sürücü kanalları ayarlanacak
         // Main Sensors
         public static ADIS16448_IMU gyro = new ADIS16448_IMU();
         public static Encoder elevatorEncoder = new Encoder(0, 1, false, EncodingType.k4X);

@@ -8,43 +8,72 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.RobotMap;
-import frc.robot.subsystems.Elevator;
 
 public class AutonomousCommand extends CommandGroup {
   // addSequential(new Command());
   // addParallel(new Command());
   public AutonomousCommand(int x) {
     boolean alliedScaleIsRight = DriverStation.getInstance().getGameSpecificMessage().charAt(1) == 'R';
+    boolean alliedSwitchIsRight = DriverStation.getInstance().getGameSpecificMessage().charAt(0) == 'R';
     switch (x) {
+    // Sol Taraf
     case 1:
       if (alliedScaleIsRight) {
+        addParallel(new SetElevatorHeight(160));
+        addParallel(new TimedJoint(1, -0.8));
+        addSequential(new GyroDrive(3.0, false));
+        addSequential(new GyroTurn(-90));
+        addSequential(new GyroDrive(3.0, false));
+        addSequential(new GyroTurn(0));
+        addSequential(new TimedIntake(0.75, -0.75));
+      } else {
         addParallel(new SetElevatorHeight(160));
         addParallel(new TimedJoint(1, -0.8));
         addSequential(new GyroDrive(4.4, false));
         addSequential(new GyroTurn(90));
         addSequential(new TimedIntake(0.75, -0.75));
-      } else {
-
       }
       break;
-
+    // Orta taraf
     case 2:
-      if (alliedScaleIsRight) {
-
+      if (alliedSwitchIsRight) {
+        addParallel(new SetElevatorHeight(50));
+        addParallel(new TimedJoint(1, -0.8));
+        addSequential(new GyroDrive(0.7, false));
+        addSequential(new GyroTurn(45));
+        addSequential(new GyroDrive(0.5, false));
+        addSequential(new GyroTurn(0));
+        addSequential(new GyroDrive(0.3, false));
+        addSequential(new TimedIntake(0.75, -0.75));
       } else {
-
+        addParallel(new SetElevatorHeight(50));
+        addParallel(new TimedJoint(1, -0.8));
+        addSequential(new GyroDrive(0.7, false));
+        addSequential(new GyroTurn(-45));
+        addSequential(new GyroDrive(0.5, false));
+        addSequential(new GyroTurn(0));
+        addSequential(new GyroDrive(0.3, false));
+        addSequential(new TimedIntake(0.75, -0.75));
       }
 
       break;
-
+    // Sağ Taraf
     case 3:
       if (alliedScaleIsRight) {
-
+        addParallel(new SetElevatorHeight(160));
+        addParallel(new TimedJoint(1, -0.8));
+        addSequential(new GyroDrive(4.4, false));
+        addSequential(new GyroTurn(-90));
+        addSequential(new TimedIntake(0.75, -0.75));
       } else {
-
+        addParallel(new SetElevatorHeight(160));
+        addParallel(new TimedJoint(1, -0.8));
+        addSequential(new GyroDrive(3.0, false));
+        addSequential(new GyroTurn(-90));
+        addSequential(new GyroDrive(3.0, false));
+        addSequential(new GyroTurn(0));
+        addSequential(new TimedIntake(0.75, -0.75));
       }
 
       break;

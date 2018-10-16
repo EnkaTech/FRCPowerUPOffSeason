@@ -8,22 +8,23 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class SetElevatorHeight extends Command {
-double height;
-Joystick joy;
+  double height;
+  Joystick joy;
+
   public SetElevatorHeight(double height) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.elevator);
-    this.height=height;
+    this.height = height;
   }
-  public SetElevatorHeight(Joystick joy){
+
+  public SetElevatorHeight(Joystick joy) {
     requires(Robot.elevator);
     this.joy = joy;
   }
@@ -36,10 +37,10 @@ Joystick joy;
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(joy!=null){
+    if (joy != null) {
       this.height = RobotMap.map(joy.getRawAxis(3), 1, -1, 1, 180);
     }
-    SmartDashboard.putNumber("Wanted Height", height+20);
+    SmartDashboard.putNumber("Wanted Height", height + 20);
     Robot.elevator.stabilize(RobotMap.elevatorEncoder, height);
   }
 
