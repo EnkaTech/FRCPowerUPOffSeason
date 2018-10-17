@@ -35,8 +35,8 @@ public class Elevator extends Subsystem {
       throttle = -0.1;
     } else if (throttle < 0 && throttle > -0.4) {
       throttle = -0.4;
-    } else if (throttle < 0 && throttle < -0.7) {
-      throttle = -0.7;
+    } else if (throttle < 0 && throttle < -0.9) {
+      throttle = -0.9;
     } else if (throttle > 0 && throttle < 0.3) {
       throttle = 0.3;
     } else if (throttle > 0 && throttle > 0.4) {

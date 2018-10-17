@@ -30,9 +30,21 @@ public class AutonomousCommand extends CommandGroup {
       } else {
         addParallel(new SetElevatorHeight(160));
         addParallel(new TimedJoint(1, -0.8));
-        addSequential(new GyroDrive(4.4, false));
-        addSequential(new GyroTurn(90));
+        addSequential(new GyroDrive(3.8, false));
+        addSequential(new GyroTurn(45));
         addSequential(new TimedIntake(0.75, -0.75));
+        if (!alliedSwitchIsRight) {
+          addParallel(new SetElevatorHeight(0));
+          addParallel(new TimedJoint(1, -0.8));
+          addSequential(new GyroTurn(135));
+          addParallel(new TimedIntake(1, 0.75));
+          addSequential(new GyroDrive(1, false));
+          addParallel(new SetElevatorHeight(50));
+          addParallel(new TimedJoint(1, 1));
+          addSequential(new GyroDrive(0.5, true));
+          addSequential(new GyroTurn(180));
+          addSequential(new TimedIntake(0.75, -0.75));
+        }
       }
       break;
     // Orta taraf
@@ -63,9 +75,21 @@ public class AutonomousCommand extends CommandGroup {
       if (alliedScaleIsRight) {
         addParallel(new SetElevatorHeight(160));
         addParallel(new TimedJoint(1, -0.8));
-        addSequential(new GyroDrive(4.4, false));
-        addSequential(new GyroTurn(-90));
+        addSequential(new GyroDrive(3.8, false));
+        addSequential(new GyroTurn(-45));
         addSequential(new TimedIntake(0.75, -0.75));
+        if (alliedSwitchIsRight) {
+          addParallel(new SetElevatorHeight(0));
+          addParallel(new TimedJoint(1, -0.8));
+          addSequential(new GyroTurn(-135));
+          addParallel(new TimedIntake(1, 0.75));
+          addSequential(new GyroDrive(1, false));
+          addParallel(new SetElevatorHeight(50));
+          addParallel(new TimedJoint(1, 1));
+          addSequential(new GyroDrive(0.5, true));
+          addSequential(new GyroTurn(-180));
+          addSequential(new TimedIntake(0.75, -0.75));
+        }
       } else {
         addParallel(new SetElevatorHeight(160));
         addParallel(new TimedJoint(1, -0.8));
@@ -75,7 +99,6 @@ public class AutonomousCommand extends CommandGroup {
         addSequential(new GyroTurn(0));
         addSequential(new TimedIntake(0.75, -0.75));
       }
-
       break;
     }
   }
