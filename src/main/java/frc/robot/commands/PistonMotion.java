@@ -11,22 +11,18 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class PistonMotion extends Command {
-  public boolean fwd;
-
-  public PistonMotion(boolean fwd) {
+boolean x;
+  public PistonMotion(boolean x) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.gripper);
-    this.fwd = fwd;
+    this.x=x;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    if (fwd)
-      Robot.gripper.tighten();
-    else
-      Robot.gripper.loosen();
+      Robot.gripper.trigger(x);
   }
 
   // Called repeatedly when this Command is scheduled to run

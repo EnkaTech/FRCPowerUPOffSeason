@@ -38,8 +38,8 @@ public class IO {
 
   // Button Assigments
   public IO() {
-    A_1.whenPressed(new PistonMotion(true));
-    B_1.whenPressed(new PistonMotion(false));
+    A_1.whenPressed(new PistonMotion(false));
+    B_1.whenPressed(new PistonMotion(true));
     b_9.whileHeld(new JointMotion(-1));
     b_10.whileHeld(new JointMotion(1));
     b_11.toggleWhenPressed(new GripperIntake(0.75));

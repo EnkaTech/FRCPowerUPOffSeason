@@ -52,7 +52,6 @@ public class RobotMap {
         public static SpeedController jointMotor = new Victor(joint);
 
         // Pneumatic valves
-        private static int lv = 4;
         private static int rv_a = 0;
         private static int rv_b = 1;
 
@@ -64,7 +63,6 @@ public class RobotMap {
         public static SpeedController elevator_2 = new Victor(elevator_cim_2);
 
         public static DoubleSolenoid rightValve = new DoubleSolenoid(rv_a, rv_b);
-        public static Solenoid leftValve = new Solenoid(lv);
 
         private static SpeedControllerGroup driveTrainL = new SpeedControllerGroup(new Victor(dt_FrontLeft),
                         new Victor(dt_RearLeft));
