@@ -8,7 +8,6 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
@@ -32,13 +31,9 @@ public class Gripper extends Subsystem {
   public void trigger(boolean fwd) {
     if(fwd){
       s1.set(Value.kForward);
-      Timer.delay(0.04);
-      s1.set(Value.kOff);
     }
     else{
       s1.set(Value.kReverse);
-      Timer.delay(0.04);
-      s1.set(Value.kOff);
     }
   }
 }

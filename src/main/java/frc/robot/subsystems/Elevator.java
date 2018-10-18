@@ -33,8 +33,8 @@ public class Elevator extends Subsystem {
     double throttle = RobotMap.map(difference, 180, -180, -0.8, 0.8);
     if (throttle > -0.01 && throttle < 0.01) {
       throttle = -0.1;
-    } else if (throttle < 0 && throttle > -0.4) {
-      throttle = -0.4;
+    } else if (throttle < 0 && throttle > -0.5) {
+      throttle = -0.5;
     } else if (throttle < 0 && throttle < -0.9) {
       throttle = -0.9;
     } else if (throttle > 0 && throttle < 0.3) {

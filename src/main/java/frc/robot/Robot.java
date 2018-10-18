@@ -79,7 +79,7 @@ public class Robot extends TimedRobot {
       compressor.setClosedLoopControl(false);
     } else if (IO.back_1.get()) {
       compressor.setClosedLoopControl(!compressor.getClosedLoopControl());
-      Timer.delay(0.2);
+      Timer.delay(0.1);
     }
     SmartDashboard.putNumber("Elevator Height", -RobotMap.elevatorEncoder.getDistance() + 20);
     SmartDashboard.putNumber("Gyro", RobotMap.gyro.getAngleX());
@@ -110,7 +110,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    RobotMap.elevatorEncoder.reset();
   }
 
   /**

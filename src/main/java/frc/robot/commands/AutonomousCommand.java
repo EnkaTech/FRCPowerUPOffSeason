@@ -16,6 +16,7 @@ public class AutonomousCommand extends CommandGroup {
   public AutonomousCommand(int x) {
     boolean alliedScaleIsRight = DriverStation.getInstance().getGameSpecificMessage().charAt(1) == 'R';
     boolean alliedSwitchIsRight = DriverStation.getInstance().getGameSpecificMessage().charAt(0) == 'R';
+    addSequential(new PistonMotion(true));
     switch (x) {
     // Sol Taraf
     case 1:
