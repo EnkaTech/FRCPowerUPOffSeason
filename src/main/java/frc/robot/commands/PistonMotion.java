@@ -7,11 +7,13 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class PistonMotion extends Command {
 boolean x;
+boolean done;
   public PistonMotion(boolean x) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -28,12 +30,15 @@ boolean x;
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    Timer.delay(0.1);
+    this.done = true;
+    
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return done;
   }
 
   // Called once after isFinished returns true
