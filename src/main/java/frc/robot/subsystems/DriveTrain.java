@@ -39,8 +39,8 @@ public class DriveTrain extends Subsystem {
     drive(joy.getRawAxis(5) * mult, joy.getRawAxis(1) * mult);
   }
 
-  public void gyroDrive(ADIS16448_IMU gyro, boolean front) {
-    double angle = gyro.getAngleX() * Kp;
+  public void gyroDrive(ADIS16448_IMU gyro, boolean front, double wantedAngle) {
+    double angle = (wantedAngle+gyro.getAngleX()) * Kp;
     if (front) {
       drive((0.7 - angle), (0.7 + angle));
     } else {
@@ -52,14 +52,14 @@ public class DriveTrain extends Subsystem {
   public void gyroTurn(ADIS16448_IMU gyro, double x) {
     double angle = gyro.getAngleX();
     double power = (x - angle) * Kp * 8;
-    if (power >= 0.5) {
-      power = 0.5;
+    if (power >= 0.6) {
+      power = 0.6;
     } else if (power > 0) {
-      power = 0.5;
-    } else if (power <= -0.5) {
-      power = -0.5;
+      power = 0.6;
+    } else if (power <= -0.6) {
+      power = -0.6;
     } else {
-      power = -0.5;
+      power = -0.6;
     }
     Timer.delay(0.0004);
     drive(power, -power);

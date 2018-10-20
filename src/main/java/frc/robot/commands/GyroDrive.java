@@ -19,12 +19,14 @@ public class GyroDrive extends TimedCommand {
    * Add your docs here.
    */
   boolean x;
-  public GyroDrive(double timeout, boolean x) {
+  double angle;
+  public GyroDrive(double timeout, boolean x, double angle) {
     super(timeout);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.driveTrain);
     this.x = x;
+    this.angle=angle;
   }
 
   // Called just before this Command runs the first time
@@ -35,7 +37,7 @@ public class GyroDrive extends TimedCommand {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.driveTrain.gyroDrive(RobotMap.gyro, x);
+    Robot.driveTrain.gyroDrive(RobotMap.gyro, x, angle);
 
   }
 

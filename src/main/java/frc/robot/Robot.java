@@ -61,7 +61,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto mode", autoChooser);
     cameraServer = CameraServer.getInstance();
     cameraServer.startAutomaticCapture();
-    compressor.setClosedLoopControl(true);
+    compressor.setClosedLoopControl(false);
     RobotMap.elevatorEncoder.setDistancePerPulse(RobotMap.elevatorDPP);
   }
 
@@ -79,7 +79,7 @@ public class Robot extends TimedRobot {
       compressor.setClosedLoopControl(false);
     } else if (IO.back_1.get()) {
       compressor.setClosedLoopControl(!compressor.getClosedLoopControl());
-      Timer.delay(0.1);
+      Timer.delay(0.2);
     }
     SmartDashboard.putNumber("Elevator Height", -RobotMap.elevatorEncoder.getDistance() + 20);
     SmartDashboard.putNumber("Gyro", RobotMap.gyro.getAngleX());
