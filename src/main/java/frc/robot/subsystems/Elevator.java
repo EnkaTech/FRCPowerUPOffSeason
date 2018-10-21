@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+import frc.robot.commands.ElevatorSet;
 import frc.robot.commands.SetElevatorHeight;
 
 /**
@@ -24,13 +25,13 @@ public class Elevator extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new SetElevatorHeight(Robot.IO.joy2));
+    setDefaultCommand(new ElevatorSet(Robot.IO.joy2));
   }
 
   public void stabilize(Encoder e, double targetDistance) {
     double distance = -e.getDistance();
     double difference = targetDistance - distance;
-    double throttle = RobotMap.map(difference, 180, -180, -0.8, 0.8);
+    double throttle = RobotMap.map(difference, 175, -175, -0.8, 0.8);
     if (throttle > -0.01 && throttle < 0.01) {
       throttle = -0.1;
     } else if (throttle < 0 && throttle > -0.5) {

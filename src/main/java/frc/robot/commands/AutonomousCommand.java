@@ -23,15 +23,15 @@ public class AutonomousCommand extends CommandGroup {
       if (alliedScaleIsRight) {
         addParallel(new SetElevatorHeight(160));
         addParallel(new TimedJoint(1, -0.8));
-        addSequential(new GyroDrive(3.0, false,0));
+        addSequential(new GyroDrive(4, false,0));
         addSequential(new GyroTurn(-90));
-        addSequential(new GyroDrive(3.0, false,-90));
+        addSequential(new GyroDrive(4, false,90));
         addSequential(new GyroTurn(0));
         addSequential(new TimedIntake(0.75, -0.75));
       } else {
         addParallel(new SetElevatorHeight(160));
         addParallel(new TimedJoint(1, -0.8));
-        addSequential(new GyroDrive(3.8, false,0));
+        addSequential(new GyroDrive(6, false,0));
         addSequential(new GyroTurn(45));
         addSequential(new TimedIntake(0.75, -0.75));
         if (!alliedSwitchIsRight) {
@@ -39,10 +39,10 @@ public class AutonomousCommand extends CommandGroup {
           addParallel(new TimedJoint(1, -0.8));
           addSequential(new GyroTurn(135));
           addParallel(new TimedIntake(1, 0.75));
-          addSequential(new GyroDrive(1, false,135));
+          addSequential(new GyroDrive(1, false,-135));
           addParallel(new SetElevatorHeight(50));
           addParallel(new TimedJoint(1, 1));
-          addSequential(new GyroDrive(0.5, true,135));
+          addSequential(new GyroDrive(0.5, true,-135));
           addSequential(new GyroTurn(180));
           addSequential(new TimedIntake(0.75, -0.75));
         }
@@ -76,7 +76,7 @@ public class AutonomousCommand extends CommandGroup {
       if (alliedScaleIsRight) {
         addParallel(new SetElevatorHeight(160));
         addParallel(new TimedJoint(1, -0.8));
-        addSequential(new GyroDrive(3.8, false,0));
+        addSequential(new GyroDrive(4.5, false,0));
         addSequential(new GyroTurn(-45));
         addSequential(new TimedIntake(0.75, -0.75));
         if (alliedSwitchIsRight) {
@@ -84,19 +84,19 @@ public class AutonomousCommand extends CommandGroup {
           addParallel(new TimedJoint(1, -0.8));
           addSequential(new GyroTurn(-135));
           addParallel(new TimedIntake(1, 0.75));
-          addSequential(new GyroDrive(1, false,-135));
+          addSequential(new GyroDrive(1, false,135));
           addParallel(new SetElevatorHeight(50));
           addParallel(new TimedJoint(1, 1));
-          addSequential(new GyroDrive(0.5, true,-135));
+          addSequential(new GyroDrive(0.5, true,135));
           addSequential(new GyroTurn(-180));
           addSequential(new TimedIntake(0.75, -0.75));
         }
       } else {
         addParallel(new SetElevatorHeight(160));
         addParallel(new TimedJoint(1, -0.8));
-        addSequential(new GyroDrive(3.0, false,0));
+        addSequential(new GyroDrive(4, false,0));
         addSequential(new GyroTurn(-90));
-        addSequential(new GyroDrive(3.0, false,-90));
+        addSequential(new GyroDrive(4, false,90));
         addSequential(new GyroTurn(0));
         addSequential(new TimedIntake(0.75, -0.75));
       }

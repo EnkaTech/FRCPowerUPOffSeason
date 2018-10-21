@@ -27,7 +27,7 @@ public class JoystickDrive extends Command {
   @Override
   protected void execute() {
     if (Robot.IO.L1_1.get() || (-RobotMap.elevatorEncoder.getDistance()+20) >= 140) {
-      Robot.driveTrain.drive(Robot.IO.joy1, 0.6);
+      Robot.driveTrain.drive(Robot.IO.joy1, 0.7);
     } else {
       Robot.driveTrain.drive(Robot.IO.joy1, 1);
     }
